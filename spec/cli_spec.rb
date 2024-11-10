@@ -41,8 +41,8 @@ describe CLI do
     it "only accepts numbers up to the given maximum - single digit" do
       allow_any_instance_of(Kernel)
         .to receive(:gets).and_return("9", "5")
-      expect {CLI.get_user_input(8)}
-        .to output("Oops! Please enter a number from 0 to 8:\n").to_stdout_from_any_process
+      expect {CLI.get_user_input(5)}
+        .to output("Oops! Please enter a number from 0 to 5:\n").to_stdout_from_any_process
       expect(CLI.get_user_input(8)).to eq(5)
     end
 
@@ -50,7 +50,7 @@ describe CLI do
       allow_any_instance_of(Kernel)
         .to receive(:gets).and_return("17", "0")
       expect {CLI.get_user_input(15)}
-        .to output("Oops! Please enter a number from 0 to 8:\n").to_stdout_from_any_process
+        .to output("Oops! Please enter a number from 0 to 15:\n").to_stdout_from_any_process
       expect(CLI.get_user_input(8)).to eq(0)
     end
 
@@ -59,6 +59,20 @@ describe CLI do
         .to receive(:gets).and_return("05")
       expect(CLI.get_user_input(8)).to eq(5)
     end
+  end
+
+  it "prompts when invalid move and displays valid moves" do
+    board = ThreeByThree.new
+    board.update(:x, 0)
+    board.update(:o, 4)
+    expect{CLI.alert_invalid_move(board)}
+      .to output("That square is taken! Please enter an available square [1, 2, 3, 5, 6, 7, 8]:\n")
+            .to_stdout_from_any_process
+    board.update(:x, 2)
+    board.update(:o, 7)
+    expect{CLI.alert_invalid_move(board)}
+      .to output("That square is taken! Please enter an available square [1, 3, 5, 6, 8]:\n")
+            .to_stdout_from_any_process
   end
 
   it "displays the result of the game.rb" do

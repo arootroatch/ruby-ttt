@@ -18,7 +18,12 @@ module CLI
   end
 
   def self.prompt_move(board)
-    puts "Please enter your move (type a number 0-#{board.last} and press 'Enter'):"
+    puts "Please enter your move (type a number 0-#{board.length - 1} and press 'Enter'):"
+  end
+
+  def self.alert_invalid_move(board)
+    available = board.available_moves
+    puts "That square is taken! Please enter an available square #{available}:\n"
   end
 
   def self.get_user_input(max)
@@ -27,7 +32,7 @@ module CLI
     if parsed and parsed <= max
       parsed
     else
-      puts "Oops! Please enter a number from 0 to 8:"
+      puts "Oops! Please enter a number from 0 to #{max}:"
       get_user_input(max)
     end
   end
