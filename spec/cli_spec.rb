@@ -61,7 +61,7 @@ describe CLI do
     end
   end
 
-  it "displays the result of the game" do
+  it "displays the result of the game.rb" do
     expect { CLI.print_result(:x_wins) }
       .to output("X wins!\n").to_stdout_from_any_process
     expect { CLI.print_result(:o_wins) }
