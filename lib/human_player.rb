@@ -11,16 +11,21 @@ class HumanPlayer
   end
 
   def take_turn(board)
-    game_board = board.get_board
-    CLI.prompt_move(game_board)
-    input = CLI.get_user_input(game_board.length - 1)
+    CLI.prompt_move(board.get_board)
+    play_valid_move(board)
+  end
+
+  private
+
+  def play_valid_move(board)
+    input = CLI.get_user_input(board.get_board.length - 1)
 
     if board.available_moves.include? input
       board.update(@token, input)
+      input
     else
       CLI.alert_invalid_move(board)
-      input = CLI.get_user_input(game_board.length - 1)
+      play_valid_move(board)
     end
-    input
   end
 end
