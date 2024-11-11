@@ -29,35 +29,53 @@ describe CLI do
       .to output("Please enter your move (type a number 0-15 and press 'Enter'):\n").to_stdout_from_any_process
   end
 
+  it "prompts user for player 1 selection" do
+    expect {CLI.prompt_player_selection(1)}
+      .to output("Please select an option for Player 1 ('X'):\n1 - Human\n2 - Computer\n").to_stdout_from_any_process
+  end
+
+  it "prompts user for player 2 selection" do
+    expect {CLI.prompt_player_selection(2)}
+      .to output("Please select an option for Player 2 ('O'):\n1 - Human\n2 - Computer\n").to_stdout_from_any_process
+  end
+
   context "get user input" do
     it "only accepts numbers" do
       allow_any_instance_of(Kernel)
         .to receive(:gets).and_return("blah", "1")
-      expect {CLI.get_user_input(8)}
+      expect {CLI.get_user_input(0, 8)}
         .to output("Oops! Please enter a number from 0 to 8:\n").to_stdout_from_any_process
-      expect(CLI.get_user_input(8)).to eq(1)
+      expect(CLI.get_user_input(0, 8)).to eq(1)
     end
 
     it "only accepts numbers up to the given maximum - single digit" do
       allow_any_instance_of(Kernel)
         .to receive(:gets).and_return("9", "5")
-      expect {CLI.get_user_input(5)}
+      expect {CLI.get_user_input(0, 5)}
         .to output("Oops! Please enter a number from 0 to 5:\n").to_stdout_from_any_process
-      expect(CLI.get_user_input(8)).to eq(5)
+      expect(CLI.get_user_input(0, 5)).to eq(5)
     end
 
     it "only accepts numbers up to the given maximum - double digit" do
       allow_any_instance_of(Kernel)
         .to receive(:gets).and_return("17", "0")
-      expect {CLI.get_user_input(15)}
+      expect {CLI.get_user_input(0, 15)}
         .to output("Oops! Please enter a number from 0 to 15:\n").to_stdout_from_any_process
-      expect(CLI.get_user_input(8)).to eq(0)
+      expect(CLI.get_user_input(0, 15)).to eq(0)
+    end
+
+    it "only accepts numbers above the given minimum" do
+      allow_any_instance_of(Kernel)
+        .to receive(:gets).and_return("0", "5")
+      expect {CLI.get_user_input(1, 5)}
+        .to output("Oops! Please enter a number from 1 to 5:\n").to_stdout_from_any_process
+      expect(CLI.get_user_input(1, 5)).to eq(5)
     end
 
     it "accounts for leading 0s" do
       allow_any_instance_of(Kernel)
         .to receive(:gets).and_return("05")
-      expect(CLI.get_user_input(8)).to eq(5)
+      expect(CLI.get_user_input(0, 8)).to eq(5)
     end
   end
 

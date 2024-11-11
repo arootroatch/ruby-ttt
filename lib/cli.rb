@@ -1,6 +1,6 @@
 module CLI
 
-  $end_states = {
+  $end_state_messages = {
     :x_wins => "X wins!",
     :o_wins => "O wins!",
     :tie => "It's a tie!"
@@ -26,19 +26,26 @@ module CLI
     puts "That square is taken! Please enter an available square #{available}:\n"
   end
 
-  def self.get_user_input(max)
+  def self.prompt_player_selection(n)
+    token = n == 1 ? "X" : "O"
+    puts "Please select an option for Player #{n} ('#{token}'):"
+    puts "1 - Human"
+    puts "2 - Computer"
+  end
+
+  def self.get_user_input(min, max)
     input = gets.chomp
     parsed = Integer(input, exception: false)
-    if parsed and parsed <= max
+    if parsed and parsed <= max and parsed >= min
       parsed
     else
-      puts "Oops! Please enter a number from 0 to #{max}:"
-      get_user_input(max)
+      puts "Oops! Please enter a number from #{min} to #{max}:"
+      get_user_input(min, max)
     end
   end
 
   def self.print_result(state)
-    puts $end_states[state]
+    puts $end_state_messages[state]
   end
 
 end
