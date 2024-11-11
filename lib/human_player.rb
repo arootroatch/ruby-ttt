@@ -1,4 +1,4 @@
-require 'cli'
+require_relative 'cli'
 
 class HumanPlayer
 

@@ -4,13 +4,13 @@ describe CLI do
   it "prints a blank 3x3 board" do
     board = [0, 1, 2, 3, 4, 5, 6, 7, 8]
     expect { CLI.print_board(board) }
-      .to output("0 1 2\n3 4 5\n6 7 8\n").to_stdout_from_any_process
+      .to output("0 1 2\n3 4 5\n6 7 8\n\n").to_stdout_from_any_process
   end
 
   it "prints a 3x3 board with tokens" do
     board = [0, :x, 2, :o, :o, 5, :x, 7, 8]
     expect { CLI.print_board(board) }
-      .to output("0 X 2\nO O 5\nX 7 8\n").to_stdout_from_any_process
+      .to output("0 X 2\nO O 5\nX 7 8\n\n").to_stdout_from_any_process
   end
 
   it "says whose turn it is" do

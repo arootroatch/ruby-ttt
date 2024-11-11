@@ -11,6 +11,7 @@ module CLI
     puts "#{formatted[0]} #{formatted[1]} #{formatted[2]}"
     puts "#{formatted[3]} #{formatted[4]} #{formatted[5]}"
     puts "#{formatted[6]} #{formatted[7]} #{formatted[8]}"
+    puts ""
   end
 
   def self.display_turn(token)

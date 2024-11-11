@@ -35,10 +35,10 @@ That square is taken! Please enter an available square [1, 2, 3, 5, 6, 7, 8]:\n"
     end
 
     it "updates board" do
+      allow($stdout).to receive(:write)
       allow_any_instance_of(Kernel)
         .to receive(:gets).and_return("1")
-      expect { @player.take_turn(@board) }
-        .to output("Please enter your move (type a number 0-8 and press 'Enter'):\n").to_stdout_from_any_process
+      @player.take_turn(@board)
       expect(@board.get_board).to eq([0, :x, 2, 3, 4, 5, 6, 7, 8])
     end
   end
