@@ -1,12 +1,12 @@
-require_relative "cli"
-require_relative 'board/three_by_three'
+require_relative 'cli'
+require_relative 'board_factory'
 require_relative 'player_factory'
 
 class TicTacToe
 
   def initialize(player1 = PlayerFactory.set_player(1, :x),
                  player2 = PlayerFactory.set_player(2, :o),
-                 board = ThreeByThree.new)
+                 board = BoardFactory.create_board_instance)
     @player1 = player1
     @player2 = player2
     @board = board
