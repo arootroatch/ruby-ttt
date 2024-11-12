@@ -1,5 +1,5 @@
 require_relative "cli"
-require_relative 'three_by_three'
+require_relative 'board/three_by_three'
 require_relative 'player_factory'
 
 class TicTacToe

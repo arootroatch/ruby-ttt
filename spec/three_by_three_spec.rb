@@ -1,4 +1,4 @@
-require "three_by_three"
+require "board/three_by_three"
 
 describe "3x3 game.rb board" do
   before(:each) do
