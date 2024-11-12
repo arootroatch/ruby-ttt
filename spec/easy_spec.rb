@@ -1,4 +1,5 @@
-require "easy"
+require "player/easy"
+require 'spec_helper'
 
 describe "easy" do
   before(:each) do
@@ -21,4 +22,18 @@ describe "easy" do
     expect(@board).to have_received(:available_moves).twice
   end
 
+  it "does not play unavailable moves" do
+    build_x_one_away_board(@board)
+    allow(@board).to receive(:available_moves).and_call_original
+    allow(@board).to receive(:update).and_call_original
+    @player.take_turn(@board)
+    expect(@board.get_board).to_not eq([:x, :x, 2, :o, :o, 5, 6, 7, 8])
+    expect(@board).to have_received(:available_moves).twice
+    expect(@board).to have_received(:update) {|arg1, arg2| [2, 5, 6, 7, 8].include? arg2}
+  end
+
+end
+
+def number_in_coll (coll)
+  coll.include?
 end

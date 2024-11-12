@@ -1,4 +1,4 @@
-require "minimax"
+require "player/minimax"
 
 describe "minimax" do
   before(:each) do

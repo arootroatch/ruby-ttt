@@ -1,4 +1,4 @@
-require "human_player"
+require "player/human_player"
 
 describe "human_player" do
   before(:each) do

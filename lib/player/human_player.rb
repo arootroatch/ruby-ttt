@@ -1,18 +1,11 @@
-require_relative 'cli'
+require_relative '../cli'
+require_relative 'player'
 
-class HumanPlayer
+class HumanPlayer < Player
 
   def initialize(token)
     @token = token
     @type = :human
-  end
-
-  def get_token
-    @token
-  end
-
-  def type
-    @type
   end
 
   def take_turn(board)

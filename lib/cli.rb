@@ -6,8 +6,18 @@ module CLI
     :tie => "It's a tie!"
   }
 
+  def self.format_board(e)
+    purple = "\u001b[35m"
+    reset = "\u001b[0m"
+    if e.is_a? Integer
+      "#{purple}#{e}#{reset}"
+    else
+      e.to_s.capitalize
+    end
+  end
+
   def self.print_board(board)
-    formatted = board.map { |e| e.to_s.capitalize }
+    formatted = board.map { |e| format_board(e) }
     puts "#{formatted[0]} #{formatted[1]} #{formatted[2]}"
     puts "#{formatted[3]} #{formatted[4]} #{formatted[5]}"
     puts "#{formatted[6]} #{formatted[7]} #{formatted[8]}"

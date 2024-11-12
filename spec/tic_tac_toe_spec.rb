@@ -1,4 +1,5 @@
 require 'tic_tac_toe'
+require 'spec_helper'
 
 describe "Game of Tic Tac Toe" do
 
@@ -69,19 +70,3 @@ Please select an option for Player 2 ('O'):\n1 - Human\n2 - Easy Computer\n3 - U
   end
 end
 
-def build_x_win_board (board)
-  board.update(:x, 0)
-  board.update(:o, 3)
-  board.update(:x, 1)
-  board.update(:o, 4)
-  board.update(:x, 2)
-end
-
-# X plays 2 for an X win
-# X plays 7 and O plays 5 for O win
-def build_x_one_away_board(board)
-  board.update(:x, 0)
-  board.update(:o, 3)
-  board.update(:x, 1)
-  board.update(:o, 4)
-end

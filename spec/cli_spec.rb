@@ -1,16 +1,23 @@
 require "cli"
 
 describe CLI do
+  purple = "\e[35m"
+  reset = "\e[0m"
   it "prints a blank 3x3 board" do
     board = [0, 1, 2, 3, 4, 5, 6, 7, 8]
     expect { CLI.print_board(board) }
-      .to output("0 1 2\n3 4 5\n6 7 8\n\n").to_stdout_from_any_process
+      .to output("#{purple}0#{reset} #{purple}1#{reset} #{purple}2#{reset}
+#{purple}3#{reset} #{purple}4#{reset} #{purple}5#{reset}
+#{purple}6#{reset} #{purple}7#{reset} #{purple}8#{reset}\n\n")
+            .to_stdout_from_any_process
   end
 
   it "prints a 3x3 board with tokens" do
     board = [0, :x, 2, :o, :o, 5, :x, 7, 8]
     expect { CLI.print_board(board) }
-      .to output("0 X 2\nO O 5\nX 7 8\n\n").to_stdout_from_any_process
+      .to output("#{purple}0#{reset} X #{purple}2#{reset}
+O O #{purple}5#{reset}
+X #{purple}7#{reset} #{purple}8#{reset}\n\n").to_stdout_from_any_process
   end
 
   it "says whose turn it is" do
