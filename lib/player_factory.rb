@@ -4,6 +4,13 @@ require_relative 'player/minimax'
 require_relative 'cli'
 
 class PlayerFactory
+
+  @players = {
+    1 => HumanPlayer,
+    2 => Easy,
+    3 => Minimax
+  }
+
   def self.set_player(n, token)
     CLI.prompt_player_selection(n)
     input = CLI.get_user_input(1, 3)
@@ -12,12 +19,6 @@ class PlayerFactory
 
   # TODO add testing for this
   def self.create_player_instance(input, token)
-    if input == 1
-      HumanPlayer.new(token)
-    elsif input == 2
-      Easy.new(token)
-    elsif input == 3
-      Minimax.new(token)
-    end
+    @players[input].new(token)
   end
 end
