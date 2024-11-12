@@ -1,19 +1,9 @@
-class ThreeByThree
+require 'board'
+
+class ThreeByThree < Board
 
   def initialize
     @board = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-  end
-
-  def get_board
-    @board
-  end
-
-  def update(token, i)
-    @board[i] = token
-  end
-
-  def available_moves
-    @board.filter { |e| e.is_a? Integer }
   end
 
   def to_paths
