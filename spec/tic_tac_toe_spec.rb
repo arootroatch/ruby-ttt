@@ -7,11 +7,11 @@ describe "Game of Tic Tac Toe" do
     allow_any_instance_of(Kernel)
       .to receive(:gets).and_return("1", "2")
     expect { game = TicTacToe.new }
-      .to output("Please select an option for Player 1 ('X'):\n1 - Human\n2 - Computer
-Please select an option for Player 2 ('O'):\n1 - Human\n2 - Computer\n").to_stdout_from_any_process
+      .to output("Please select an option for Player 1 ('X'):\n1 - Human\n2 - Easy Computer\n3 - Unbeatable Computer
+Please select an option for Player 2 ('O'):\n1 - Human\n2 - Easy Computer\n3 - Unbeatable Computer\n").to_stdout_from_any_process
 
     expect(game.get_player(1)).to eq([:human, :x])
-    expect(game.get_player(2)).to eq([:minimax, :o])
+    expect(game.get_player(2)).to eq([:easy, :o])
     expect(game.get_board).to eq([0, 1, 2, 3, 4, 5, 6, 7, 8])
   end
 

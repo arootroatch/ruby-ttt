@@ -31,13 +31,14 @@ module CLI
     token = n == 1 ? "X" : "O"
     puts "Please select an option for Player #{n} ('#{token}'):"
     puts "1 - Human"
-    puts "2 - Computer"
+    puts "2 - Easy Computer"
+    puts "3 - Unbeatable Computer"
   end
 
   def self.get_user_input(min, max)
     input = gets.chomp
     parsed = Integer(input, exception: false)
-    if parsed and parsed <= max and parsed >= min
+    if parsed and parsed.between?(min, max)
       parsed
     else
       puts "Oops! Please enter a number from #{min} to #{max}:"

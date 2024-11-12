@@ -12,7 +12,4 @@ class Minimax
   def type
     @type
   end
-
-
-
 end

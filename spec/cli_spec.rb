@@ -31,12 +31,14 @@ describe CLI do
 
   it "prompts user for player 1 selection" do
     expect {CLI.prompt_player_selection(1)}
-      .to output("Please select an option for Player 1 ('X'):\n1 - Human\n2 - Computer\n").to_stdout_from_any_process
+      .to output("Please select an option for Player 1 ('X'):\n1 - Human\n2 - Easy Computer\n3 - Unbeatable Computer\n")
+            .to_stdout_from_any_process
   end
 
   it "prompts user for player 2 selection" do
     expect {CLI.prompt_player_selection(2)}
-      .to output("Please select an option for Player 2 ('O'):\n1 - Human\n2 - Computer\n").to_stdout_from_any_process
+      .to output("Please select an option for Player 2 ('O'):\n1 - Human\n2 - Easy Computer\n3 - Unbeatable Computer\n")
+            .to_stdout_from_any_process
   end
 
   context "get user input" do

@@ -1,6 +1,7 @@
 require_relative "cli"
 require_relative "human_player"
 require_relative 'three_by_three'
+require_relative 'easy'
 
 class TicTacToe
 
@@ -40,14 +41,21 @@ class TicTacToe
     @board.get_board
   end
 
-  private
-
   def set_player(n, token)
     CLI.prompt_player_selection(n)
-    input = CLI.get_user_input(1, 2)
-    input == 1 ? HumanPlayer.new(token) : Minimax.new(token)
+    input = CLI.get_user_input(1, 3)
+    create_player_instance(input, token)
   end
 
+  def create_player_instance(input, token)
+    if input == 1
+      HumanPlayer.new(token)
+    elsif input == 2
+      Easy.new(token)
+    elsif input == 3
+      Minimax.new(token)
+    end
+  end
 end
 
 if __FILE__ == $0
