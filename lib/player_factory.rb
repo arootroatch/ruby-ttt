@@ -17,7 +17,6 @@ class PlayerFactory
     create_player_instance(input, token)
   end
 
-  # TODO add testing for this
   def self.create_player_instance(input, token)
     @players[input].new(token)
   end
