@@ -1,10 +1,14 @@
 require "player/human_player"
+require "player/player"
 
-describe "human_player" do
+describe HumanPlayer do
   before(:each) do
     @player = HumanPlayer.new(:x)
     @board = ThreeByThree.new
   end
+
+  it { expect(described_class).to be < Player }
+
   it 'should initialize player with token' do
     expect(@player.get_token).to eq(:x)
   end

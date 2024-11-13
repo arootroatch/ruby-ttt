@@ -1,9 +1,12 @@
 require "board/three_by_three"
+require "board/board"
 
-describe "3x3 game.rb board" do
+describe ThreeByThree do
   before(:each) do
     @board = ThreeByThree.new
   end
+
+  it { expect(described_class).to be < Board }
 
   it "creates instance of game.rb board" do
     expect(@board.get_board ).to eq([0, 1, 2, 3, 4, 5, 6, 7, 8])

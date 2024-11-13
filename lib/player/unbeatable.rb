@@ -9,8 +9,8 @@ class Unbeatable < Player
     @minimax = Minimax.new(@token)
   end
 
-  def take_turn(board)
-    move = @minimax.find_best_move(board)
+  def take_turn(board, minimax = @minimax)
+    move = minimax.find_best_move(board)
     board.update(@token, move)
   end
 end

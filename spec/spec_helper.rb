@@ -15,7 +15,8 @@ def build_x_one_away_board(board)
   board.update(:o, 4)
 end
 
-def unbeatable? (ai_player, board)
+
+def unbeatable? (minimax, board)
   all_possible_combos = board.get_board.permutation.map { |arr| arr.take(5) }
   no_dupes = all_possible_combos.to_set
   has_lost = false
@@ -24,7 +25,7 @@ def unbeatable? (ai_player, board)
   no_dupes.each do |combo|
     reset_board(board)
     game_count += 1
-    result = play_sim_game(combo, ai_player, board)
+    result = play_sim_game(combo, minimax, board)
     if result == :x_wins
       has_lost = true
       break
@@ -34,7 +35,7 @@ def unbeatable? (ai_player, board)
   !has_lost
 end
 
-def play_sim_game(combo, ai_player, board)
+def play_sim_game(combo, minimax, board)
   is_ai = false
   state = board.score
 
@@ -48,7 +49,8 @@ def play_sim_game(combo, ai_player, board)
       state = :o_wins
       break
     elsif is_ai
-      ai_player.take_turn(board)
+      ai_move = minimax.find_best_move(board)
+      board.update(:o, ai_move)
     else
       board.update(:x, move)
     end

@@ -1,11 +1,14 @@
 require "player/easy"
 require 'spec_helper'
+require 'player/player'
 
-describe "easy" do
+describe Easy do
   before(:each) do
     @player = Easy.new(:o)
     @board = ThreeByThree.new
   end
+
+  it { expect(described_class).to be < Player }
 
   it 'should initialize player with token' do
     expect(@player.get_token).to eq(:o)
@@ -29,7 +32,7 @@ describe "easy" do
     @player.take_turn(@board)
     expect(@board.get_board).to_not eq([:x, :x, 2, :o, :o, 5, 6, 7, 8])
     expect(@board).to have_received(:available_moves).twice
-    expect(@board).to have_received(:update) {|arg1, arg2| [2, 5, 6, 7, 8].include? arg2}
+    expect(@board).to have_received(:update) { |arg1, arg2| [2, 5, 6, 7, 8].include? arg2 }
   end
 
 end
