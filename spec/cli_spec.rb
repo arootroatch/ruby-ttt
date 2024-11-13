@@ -5,6 +5,7 @@ require 'cli'
 describe CLI do
   purple = "\e[35m"
   reset = "\e[0m"
+
   it 'prints a blank 3x3 board' do
     board = [0, 1, 2, 3, 4, 5, 6, 7, 8]
     expect { CLI.print_board(board) }
