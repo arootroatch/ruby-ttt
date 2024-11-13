@@ -19,7 +19,7 @@ Please select an option for Player 2 ('O'):\n1 - Human\n2 - Easy Computer\n3 - U
   context "play_game" do
     before(:each) do
       @player1 = HumanPlayer.new(:x)
-      @player2 = Minimax.new(:o)
+      @player2 = Unbeatable.new(:o)
       @board = ThreeByThree.new
       @game = TicTacToe.new(@player1, @player2, @board)
 

@@ -1,26 +1,19 @@
-require_relative 'player'
-
-class Minimax < Player
+class Minimax
 
   def initialize(token)
     @token = token
     @opponent_token = @token == :x ? :o : :x
-    @type = :minimax
-  end
-
-  def take_turn(board)
-    move = find_best_move(board)
-    board.update(@token, move)
+    @minimax ||= {}
   end
 
   def find_best_move(board)
-    best_move = nil
+    best_move = -1
     best_score = -1000
     available_moves = board.available_moves
 
     available_moves.each do |move|
       board.update(@token, move)
-      move_score = minimax(board, 0, false)
+      move_score = @minimax[[board.get_board, 0, false]] ||= minimax(board, 0, false)
       board.update(move, move) # reset board back to number of index
 
       if move_score > best_score
@@ -28,12 +21,13 @@ class Minimax < Player
         best_score = move_score
       end
     end
-
     best_move
   end
 
   def minimax(board, depth, is_max)
     state = board.score
+    token = is_max ? @token : @opponent_token
+
     if state != :in_progress
       evaluate(state, depth)
     else
@@ -41,12 +35,12 @@ class Minimax < Player
       best = is_max ? -1000 : 1000
 
       available_moves.each do |move|
-        board.update(@token, move)
-        scores = [best, minimax(board, depth + 1, !is_max)].minmax
+        board.update(token, move)
+        @minimax[[board.get_board, depth + 1, !is_max]] ||= minimax(board, depth + 1, !is_max)
+        scores = [best, @minimax[[board.get_board, depth + 1, !is_max]]].minmax
         best = is_max ? scores.last : scores.first
         board.update(move, move)
       end
-
       best
     end
   end
@@ -71,5 +65,4 @@ class Minimax < Player
       -10 + depth
     end
   end
-
 end

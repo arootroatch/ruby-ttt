@@ -1,32 +1,24 @@
-require "player/minimax"
+require 'player/minimax'
 
 describe "minimax" do
   before(:each) do
-    @player = Minimax.new(:o)
     @board = ThreeByThree.new
-  end
-
-  it 'should initialize player with token' do
-    expect(@player.get_token).to eq(:o)
-  end
-
-  it "has a player type of :minimax" do
-    expect(@player.type).to eq(:minimax)
+    @minimax = Minimax.new(:o)
   end
 
   context "find best move" do
     it "returns best move - full board" do
-      allow(@player).to receive(:minimax).and_return(10, 0, 2, 1, 5, 6, 7, 8, 4)
-      expect(@player.find_best_move(@board)).to eq(0)
-      expect(@player).to have_received(:minimax).exactly(9).times
+      allow(@minimax).to receive(:minimax).and_return(10, 0, 2, 1, 5, 6, 7, 8, 4)
+      expect(@minimax.find_best_move(@board)).to eq(0)
+      expect(@minimax).to have_received(:minimax).exactly(9).times
     end
 
     it "returns best move - half full board" do
       board = ThreeByThree.new
       build_x_one_away_board(board)
-      allow(@player).to receive(:minimax).and_return(10, 0, 2, 1, 5)
-      expect(@player.find_best_move(board)).to eq(2)
-      expect(@player).to have_received(:minimax).exactly(5).times
+      allow(@minimax).to receive(:minimax).and_return(10, 0, 2, 1, 5)
+      expect(@minimax.find_best_move(board)).to eq(2)
+      expect(@minimax).to have_received(:minimax).exactly(5).times
     end
   end
 
@@ -53,5 +45,4 @@ describe "minimax" do
     }
 
   end
-
 end

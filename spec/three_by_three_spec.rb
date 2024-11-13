@@ -42,6 +42,19 @@ describe "3x3 game.rb board" do
       expect(@board.score).to eq(:x_wins)
     end
 
+    fit "scores full board with winner" do
+      @board.update(:x, 0)
+      @board.update(:o, 1)
+      @board.update(:o, 2)
+      @board.update(:o, 3)
+      @board.update(:o, 4)
+      @board.update(:x, 5)
+      @board.update(:x, 6)
+      @board.update(:x, 7)
+      @board.update(:x, 8)
+      expect(@board.score).to eq(:x_wins)
+    end
+
     it 'scores O winning horizontally' do
       @board.update(:o, 0)
       @board.update(:x, 4)

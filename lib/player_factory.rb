@@ -1,6 +1,6 @@
 require_relative 'player/human_player'
 require_relative 'player/easy'
-require_relative 'player/minimax'
+require_relative 'player/unbeatable'
 require_relative 'cli'
 
 class PlayerFactory
@@ -8,7 +8,7 @@ class PlayerFactory
   @players = {
     1 => HumanPlayer,
     2 => Easy,
-    3 => Minimax
+    3 => Unbeatable
   }
 
   def self.set_player(n, token)

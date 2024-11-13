@@ -15,12 +15,12 @@ class ThreeByThree < Board
 
   def score
     paths = to_paths
-    if available_moves.empty?
-      :tie
+    if x_wins?(paths)
+      :x_wins
     elsif o_wins?(paths)
       :o_wins
-    elsif x_wins?(paths)
-      :x_wins
+    elsif available_moves.empty?
+      :tie
     else
       :in_progress
     end
