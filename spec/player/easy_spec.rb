@@ -38,6 +38,3 @@ describe Easy do
   end
 end
 
-def number_in_coll(coll)
-  coll.include?
-end

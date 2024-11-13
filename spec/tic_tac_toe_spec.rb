@@ -65,6 +65,7 @@ Please select an option for Player 2 ('O'):\n1 - Human\n2 - Easy Computer\n3 - U
       expect(@game.board).to eq([:x, :x, 2, :o, :o, :o, 6, :x, 8])
       expect(@player1).to have_received(:take_turn).once
       expect(@player2).to have_received(:take_turn).once
+      expect($stdout).to have_received(:write).with("O wins!", "\n")
     end
 
     it 'prints ending game state if game over' do
