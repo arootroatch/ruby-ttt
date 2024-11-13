@@ -1,14 +1,9 @@
+# frozen_string_literal: true
+
 class Player
-
-  def get_token
-    @token
-  end
-
-  def type
-    @type
-  end
+  attr_reader :token, :type
 
   def take_turn
-    raise("not implemented")
+    raise('not implemented')
   end
 end

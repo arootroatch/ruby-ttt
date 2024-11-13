@@ -16,10 +16,10 @@ class TicTacToe
   def play_game
     state = @board.score
     player = @turns.even? ? @player2 : @player1
-    CLI.print_board(@board.get_board)
+    CLI.print_board(@board.board)
 
     if state == :in_progress
-      CLI.display_turn(player.get_token)
+      CLI.display_turn(player.token)
       player.take_turn(@board)
       @turns += 1
       play_game
@@ -30,14 +30,14 @@ class TicTacToe
 
   def get_player(n)
     if n == 1
-      [@player1.type, @player1.get_token]
+      [@player1.type, @player1.token]
     elsif n == 2
-      [@player2.type, @player2.get_token]
+      [@player2.type, @player2.token]
     end
   end
 
-  def get_board
-    @board.get_board
+  def board
+    @board.board
   end
 end
 

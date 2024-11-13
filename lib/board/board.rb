@@ -1,10 +1,10 @@
-class Board
-  def get_board
-    @board
-  end
+# frozen_string_literal: true
 
-  def update(token, i)
-    @board[i] = token
+class Board
+  attr_reader :board
+
+  def update(token, idx)
+    @board[idx] = token
   end
 
   def available_moves
@@ -12,10 +12,10 @@ class Board
   end
 
   def to_paths
-    raise("not implemented")
+    raise('not implemented')
   end
 
   def score
-    raise("not implemented")
+    raise('not implemented')
   end
 end

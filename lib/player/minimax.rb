@@ -13,7 +13,7 @@ class Minimax
 
     available_moves.each do |move|
       board.update(@token, move)
-      move_score = @minimax[[board.get_board, 0, false]] ||= minimax(board, 0, false)
+      move_score = @minimax[[board.board, 0, false]] ||= minimax(board, 0, false)
       board.update(move, move) # reset board back to number of index
 
       if move_score > best_score
@@ -36,8 +36,8 @@ class Minimax
 
       available_moves.each do |move|
         board.update(token, move)
-        @minimax[[board.get_board, depth + 1, !is_max]] ||= minimax(board, depth + 1, !is_max)
-        scores = [best, @minimax[[board.get_board, depth + 1, !is_max]]].minmax
+        @minimax[[board.board, depth + 1, !is_max]] ||= minimax(board, depth + 1, !is_max)
+        scores = [best, @minimax[[board.board, depth + 1, !is_max]]].minmax
         best = is_max ? scores.last : scores.first
         board.update(move, move)
       end

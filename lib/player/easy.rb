@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require_relative 'player'
 
 class Easy < Player
-
   def initialize(token)
+    super()
     @token = token
     @type = :easy
   end

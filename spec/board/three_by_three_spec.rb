@@ -1,5 +1,7 @@
-require "board/three_by_three"
-require "board/board"
+# frozen_string_literal: true
+
+require 'board/three_by_three'
+require 'board/board'
 
 describe ThreeByThree do
   before(:each) do
@@ -8,31 +10,31 @@ describe ThreeByThree do
 
   it { expect(described_class).to be < Board }
 
-  it "creates instance of game.rb board" do
-    expect(@board.get_board ).to eq([0, 1, 2, 3, 4, 5, 6, 7, 8])
+  it 'creates instance of game.rb board' do
+    expect(@board.board).to eq([0, 1, 2, 3, 4, 5, 6, 7, 8])
   end
 
-  it "updates board with move" do
+  it 'updates board with move' do
     @board.update(:x, 4)
-    expect(@board.get_board).to eq([0, 1, 2, 3, :x, 5, 6, 7, 8])
+    expect(@board.board).to eq([0, 1, 2, 3, :x, 5, 6, 7, 8])
     @board.update(:o, 0)
-    expect(@board.get_board).to eq([:o, 1, 2, 3, :x, 5, 6, 7, 8])
+    expect(@board.board).to eq([:o, 1, 2, 3, :x, 5, 6, 7, 8])
   end
 
-  it "returns available moves" do
+  it 'returns available moves' do
     @board.update(:x, 4)
     @board.update(:o, 0)
     expect(@board.available_moves).to eq([1, 2, 3, 5, 6, 7, 8])
   end
 
-  it "divides board into winning paths" do
+  it 'divides board into winning paths' do
     expect(@board.to_paths).to eq([[0, 1, 2], [3, 4, 5], [6, 7, 8],
                                    [0, 3, 6], [1, 4, 7], [2, 5, 8],
                                    [0, 4, 8], [2, 4, 6]])
   end
 
-  context "scoring" do
-    it "game.rb not over" do
+  context 'scoring' do
+    it 'game.rb not over' do
       expect(@board.score).to eq(:in_progress)
     end
 
@@ -45,7 +47,7 @@ describe ThreeByThree do
       expect(@board.score).to eq(:x_wins)
     end
 
-    fit "scores full board with winner" do
+    it 'scores full board with winner' do
       @board.update(:x, 0)
       @board.update(:o, 1)
       @board.update(:o, 2)
@@ -115,6 +117,5 @@ describe ThreeByThree do
       @board.update(:o, 8)
       expect(@board.score).to eq(:tie)
     end
-
   end
 end

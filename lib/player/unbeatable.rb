@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require_relative 'player'
 require_relative 'minimax'
 
 class Unbeatable < Player
-
   def initialize(token)
+    super()
     @token = token
     @type = :unbeatable
     @minimax = Minimax.new(@token)

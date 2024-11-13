@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require_relative 'board'
 
 class ThreeByThree < Board
-
   def initialize
+    super
     @board = [0, 1, 2, 3, 4, 5, 6, 7, 8]
   end
 
@@ -28,30 +30,30 @@ class ThreeByThree < Board
 
   private
 
-  def to_horizontals (paths)
+  def to_horizontals(paths)
     paths << @board.take(3)
     paths << @board.drop(3).take(3)
     paths << @board.drop(6).take(3)
   end
 
-  def to_verticals (paths)
+  def to_verticals(paths)
     paths << [@board[0], @board[3], @board [6]]
     paths << [@board[1], @board[4], @board [7]]
     paths << [@board[2], @board[5], @board [8]]
   end
 
-  def to_diagonals (paths)
+  def to_diagonals(paths)
     paths << [@board[0], @board[4], @board [8]]
     paths << [@board[2], @board[4], @board [6]]
   end
 
-  def x_wins? (paths)
-    filtered = paths.filter { |path| path == [:x, :x, :x] }
+  def x_wins?(paths)
+    filtered = paths.filter { |path| path == %i[x x x] }
     !filtered.empty?
   end
 
-  def o_wins? (paths)
-    filtered = paths.filter { |path| path == [:o, :o, :o] }
+  def o_wins?(paths)
+    filtered = paths.filter { |path| path == %i[o o o] }
     !filtered.empty?
   end
 end

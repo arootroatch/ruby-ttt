@@ -1,4 +1,6 @@
-def build_x_win_board (board)
+# frozen_string_literal: true
+
+def build_x_win_board(board)
   board.update(:x, 0)
   board.update(:o, 3)
   board.update(:x, 1)
@@ -15,9 +17,8 @@ def build_x_one_away_board(board)
   board.update(:o, 4)
 end
 
-
-def unbeatable? (minimax, board)
-  all_possible_combos = board.get_board.permutation.map { |arr| arr.take(5) }
+def unbeatable?(minimax, board)
+  all_possible_combos = board.board.permutation.map { |arr| arr.take(5) }
   no_dupes = all_possible_combos.to_set
   has_lost = false
   game_count = 0
@@ -41,7 +42,7 @@ def play_sim_game(combo, minimax, board)
 
   combo.each do |move|
     state = board.score
-    game_board = board.get_board
+    game_board = board.board
 
     if state != :in_progress || !move
       break
@@ -54,13 +55,14 @@ def play_sim_game(combo, minimax, board)
     else
       board.update(:x, move)
     end
+
     is_ai = !is_ai
   end
   state
 end
 
 def reset_board(board)
-  (0..8).each { |n|
+  (0..8).each do |n|
     board.update(n, n)
-  }
+  end
 end
