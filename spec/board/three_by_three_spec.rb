@@ -38,83 +38,46 @@ describe ThreeByThree do
       expect(@board.score).to eq(:in_progress)
     end
 
-    it 'scores X winning horizontally' do
-      @board.update(:x, 0)
-      @board.update(:o, 4)
-      @board.update(:x, 1)
-      @board.update(:o, 3)
-      @board.update(:x, 2)
-      expect(@board.score).to eq(:x_wins)
+    [['X', :x, :o, :x_wins], ['O', :o, :x, :o_wins]].map do |arr|
+      it "scores #{arr[0]} winning horizontally" do
+        @board.update(arr[1], 0)
+        @board.update(arr[2], 4)
+        @board.update(arr[1], 1)
+        @board.update(arr[2], 3)
+        @board.update(arr[1], 2)
+        expect(@board.score).to eq(arr[3])
+      end
+    end
+
+    [['X', :x, :o, :x_wins], ['O', :o, :x, :o_wins]].map do |arr|
+      it "scores #{arr[0]} winning vertically" do
+        @board.update(arr[1], 0)
+        @board.update(arr[2], 1)
+        @board.update(arr[1], 3)
+        @board.update(arr[2], 2)
+        @board.update(arr[1], 6)
+        expect(@board.score).to eq(arr[3])
+      end
+    end
+
+    [['X', :x, :o, :x_wins], ['O', :o, :x, :o_wins]].map do |arr|
+      it "scores #{arr[0]} winning diagonally" do
+        @board.update(arr[1], 0)
+        @board.update(arr[2], 1)
+        @board.update(arr[1], 4)
+        @board.update(arr[2], 2)
+        @board.update(arr[1], 8)
+        expect(@board.score).to eq(arr[3])
+      end
     end
 
     it 'scores full board with winner' do
-      @board.update(:x, 0)
-      @board.update(:o, 1)
-      @board.update(:o, 2)
-      @board.update(:o, 3)
-      @board.update(:o, 4)
-      @board.update(:x, 5)
-      @board.update(:x, 6)
-      @board.update(:x, 7)
-      @board.update(:x, 8)
+      build_x_wins_full_board(@board)
       expect(@board.score).to eq(:x_wins)
-    end
-
-    it 'scores O winning horizontally' do
-      @board.update(:o, 0)
-      @board.update(:x, 4)
-      @board.update(:o, 1)
-      @board.update(:x, 3)
-      @board.update(:o, 2)
-      expect(@board.score).to eq(:o_wins)
-    end
-
-    it 'scores X winning vertically' do
-      @board.update(:x, 0)
-      @board.update(:o, 1)
-      @board.update(:x, 3)
-      @board.update(:o, 2)
-      @board.update(:x, 6)
-      expect(@board.score).to eq(:x_wins)
-    end
-
-    it 'scores O winning vertically' do
-      @board.update(:o, 0)
-      @board.update(:x, 1)
-      @board.update(:o, 3)
-      @board.update(:x, 2)
-      @board.update(:o, 6)
-      expect(@board.score).to eq(:o_wins)
-    end
-
-    it 'scores X winning diagonally' do
-      @board.update(:x, 0)
-      @board.update(:o, 1)
-      @board.update(:x, 4)
-      @board.update(:o, 2)
-      @board.update(:x, 8)
-      expect(@board.score).to eq(:x_wins)
-    end
-
-    it 'scores O winning diagonally' do
-      @board.update(:o, 0)
-      @board.update(:x, 1)
-      @board.update(:o, 4)
-      @board.update(:x, 2)
-      @board.update(:o, 8)
-      expect(@board.score).to eq(:o_wins)
     end
 
     it 'scores tie game.rb' do
-      @board.update(:x, 0)
-      @board.update(:o, 1)
-      @board.update(:x, 2)
-      @board.update(:o, 3)
-      @board.update(:x, 4)
-      @board.update(:x, 5)
-      @board.update(:o, 6)
-      @board.update(:x, 7)
-      @board.update(:o, 8)
+      build_tie_game_board(@board)
       expect(@board.score).to eq(:tie)
     end
   end

@@ -50,6 +50,7 @@ Please select an option for Player 2 ('O'):\n1 - Human\n2 - Easy Computer\n3 - U
       build_x_one_away_board(@board)
       allow(CLI).to receive(:display_turn)
       allow(@player1).to receive(:take_turn) { @board.update(:x, 2) }
+
       @game.play_game
       expect(CLI).to have_received(:display_turn).with(:x)
       expect(@player1).to have_received(:take_turn)
@@ -59,6 +60,7 @@ Please select an option for Player 2 ('O'):\n1 - Human\n2 - Easy Computer\n3 - U
       build_x_one_away_board(@board)
       allow(@player1).to receive(:take_turn) { @board.update(:x, 7) }
       allow(@player2).to receive(:take_turn) { @board.update(:o, 5) }
+
       @game.play_game
       expect(@game.board).to eq([:x, :x, 2, :o, :o, :o, 6, :x, 8])
       expect(@player1).to have_received(:take_turn).once
